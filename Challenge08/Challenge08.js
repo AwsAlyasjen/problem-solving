@@ -4,7 +4,7 @@
 // Challenge 01
 
 // Important:
-// To solve these challenges you have use (for in ,for of) or (Object.keys ,Object.value, Object.entries )
+// To solve these challenges you have use (for in ,for of) or (Object.keys ,Object.values, Object.entries )
 
 // Resources:
 // for in : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in
@@ -27,11 +27,12 @@
 // -------------------------------------------------------------------------------------------------------
 
 const customerAndAge = (obj) => {
-    let a=[];
-for (const property in obj) {
-        a[obj]=(`[Customer Name :${property} , Age :${obj[property]}]`);
-        return(a[obj]);
-      }
+  let arr = [];
+  for (const key in obj) {
+      arr.push(`Customer Name :${key} , Age :${obj[key]}`)
+  }
+
+  return arr;
 };
 
 // -------------------------------------------------------------------------------------------------------
@@ -58,15 +59,13 @@ for (const property in obj) {
 // -------------------------------------------------------------------------------------------------------
 
 const getEntries = (obj) => {
-    let a=[];
-    for (const [key, value] of Object.entries(obj)) {
-      //console.log(`${key}: ${value}`);
-      for(let i=0;i<1;i++){
-        a[i]=(`${key}: ${value}`);
-        console.log(a[i]);
-      }
-      
-    }};
+  let arr = [];
+  for (const e of Object.entries(obj)) {
+    arr.push(`${e[0]}: ${e[1]}`)    
+  }
+
+  return arr;
+};
 
 // -------------------------------------------------------------------------------------------------------
 // Challenge 03
@@ -106,18 +105,13 @@ const courses = [
 const getInfo = (arr) => {
   let coursesName = [];
   let studentsName = [];
-  function copyArray (){
-    for ( i=0; i<courses.length; i++ )
-    {
-      for ( j=0; j<courses.length; j++ )
-      {
-       studentsName[i].push(courses[i][2][i]);
-      }
-      coursesName[i].push(courses[i][0]);
-    }
-    return(coursesName,studentsName);
-
-  }
+    arr.forEach(course => {
+       coursesName.push(course.course);
+       course.Students.forEach(student => {
+           studentsName.push(student);
+       });
+    });
+  return { coursesName, studentsName };
 };
 
 //  ------------------------------------------------------------------------------------------------------
@@ -139,8 +133,16 @@ const getInfo = (arr) => {
 //  ------------------------------------------------------------------------------------------------------
 
 const getStudents = (arr) => {
-  // write your code here
-
+    let resultData = [];
+    arr.forEach(student => {
+        courses.forEach(course => {
+            course.Students.forEach(x => {
+                if (x === student)
+                    resultData.push({ Student: student, course: course.course });
+            });
+        });
+    });
+    return resultData;
 };
 
 module.exports = {

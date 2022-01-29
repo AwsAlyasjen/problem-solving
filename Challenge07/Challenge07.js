@@ -19,6 +19,9 @@
 // ------------------------
 
 const objLat = (obj) => {
+ exercise03
+    // write your code here
+ main
     var firstName = obj.firstName[0].toUpperCase() + obj.firstName.slice(1, obj.firstName.length);
     var lastName = obj.lastName[0].toUpperCase() + obj.lastName.slice(1, obj.lastName.length);
 
@@ -89,6 +92,19 @@ const cvFormatter = (arr) => {
     let data = [];
 
     for (let i = 0; i < arr.length; i++) {
+ exercise03
+        const betaData = arr[i];
+        if (betaData.yearsOfExperience > 1) {
+            var fullName = "";
+
+            if (betaData.firstName && betaData.firstName !== "null")
+                fullName = betaData.firstName;
+
+            if (betaData.lastName && betaData.lastName !== "null") {
+                if (betaData.firstName && betaData.firstName !== "null")
+                    fullName += " ";
+                fullName += betaData.lastName;
+
         const newData = arr[i];
         if (newData.yearsOfExperience > 1) {
             var fullName = "";
@@ -100,11 +116,16 @@ const cvFormatter = (arr) => {
                 if (newData.firstName && newData.firstName !== "null")
                     fullName += " ";
                 fullName += newData.lastName;
+ main
             }
 
             data.push({
                 fullName: fullName,
+ exercise03
+                tech: betaData.tech
+
                 tech: newData.tech
+              main
             });
         }
     }
@@ -143,6 +164,28 @@ const applicationsStatics = (arr) => {
     }
 
     for (let i = 0; i < arr.length; i++) {
+ exercise03
+        const alphaData = arr[i];
+        if (alphaData.tech === "Python") {
+            result.python_Devs++;
+        }
+        else if (alphaData.tech === "JS") {
+            result.javaScript_Devs++;
+        }
+
+        else if (alphaData.tech === ".Net") {
+            result.dotNet_Devs++;
+        }
+        else if (alphaData.tech === "Java") {
+            result.java_Devs++;
+        }
+
+        if (alphaData.yearsOfExperience <= 1 ||
+             (alphaData.firstName == "null" ||
+              alphaData.firstName == "") && 
+              (alphaData.lastName ==
+            "null" || alphaData.lastName == "")) {
+
         const data = arr[i];
         if (data.tech === "Python") {
             result.python_Devs++;
@@ -160,12 +203,15 @@ const applicationsStatics = (arr) => {
 
         if (data.yearsOfExperience <= 1 || (data.firstName == "null" || data.firstName == "") && (data.lastName ==
             "null" || data.lastName == "")) {
+ main
             result.rejectedApplicants++
 
         }
         result.totalApplicants++
     }
     return result;
+ exercise03
+
 };
 
 // 4) ---------------------
@@ -283,6 +329,7 @@ let data = {
             ]
         },
     ],
+ main
 };
 
 //  Note that:
@@ -291,6 +338,17 @@ let data = {
 
 const classesAvg = (data) => {
     for (let i = 0; i < data.grades.length; i++) {
+ exercise03
+        const marks = data.grades[i];
+    for (let j = 0; j < marks.classes.length; j++) {
+        let sum = 0;   
+        const newMarks = marks.classes[j];
+          
+
+            for (let x = 0; x < newMarks.classScores.length; x++)
+                sum += newMarks.classScores[x];
+            newMarks.avg = Math.floor(sum / newMarks.classScores.length);
+
         const newGrades = data.grades[i];
         for (let j = 0; j < newGrades.classes.length; j++) {
             const calc = newGrades.classes[j];
@@ -299,6 +357,7 @@ const classesAvg = (data) => {
             for (let x = 0; x < calc.classScores.length; x++)
                 sum += calc.classScores[x];
             calc.avg = Math.floor(sum / calc.classScores.length);
+ main
         }
     }
     return data;
