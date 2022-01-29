@@ -19,13 +19,10 @@
 // ------------------------
 
 const objLat = (obj) => {
-    firstName :Object.values(obj),
-    lastName:lastName,
-    age:age,
-    hobby:hobby
+    var firstName = obj.firstName[0].toUpperCase() + obj.firstName.slice(1, obj.firstName.length);
+    var lastName = obj.lastName[0].toUpperCase() + obj.lastName.slice(1, obj.lastName.length);
 
-        return( `my name is ${firstName} ${lastName} I am  ${age} YO, and I love  ${hobby}.`);
-        
+    return `my name is ${firstName} ${lastName} I am ${obj.age} YO, and I love ${obj.hobby}.`;
 };
 
 // 2) ---------------------
@@ -89,8 +86,30 @@ const objLat = (obj) => {
 
 // ------------------------
 const cvFormatter = (arr) => {
-    
-    // write your code here
+    let data = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        const newData = arr[i];
+        if (newData.yearsOfExperience > 1) {
+            var fullName = "";
+
+            if (newData.firstName && newData.firstName !== "null")
+                fullName = newData.firstName;
+
+            if (newData.lastName && newData.lastName !== "null") {
+                if (newData.firstName && newData.firstName !== "null")
+                    fullName += " ";
+                fullName += newData.lastName;
+            }
+
+            data.push({
+                fullName: fullName,
+                tech: newData.tech
+            });
+        }
+    }
+
+    return data;
 };
 
 // 3) ---------------------
@@ -110,11 +129,43 @@ const cvFormatter = (arr) => {
 // and fill it up based on the results
 
 //  Note that:
-//  1- rejectedApplicants are applications that has both the names empty or null and whoever have less than one year of Experience
+//  1- rejectedApplicants are applications that has both the names empty or null and whoever have one year or less of Experience
 
 // ------------------------
 const applicationsStatics = (arr) => {
-    // write your code here
+    let result = {
+        python_Devs: 0,
+        javaScript_Devs: 0,
+        dotNet_Devs: 0,
+        java_Devs: 0,
+        totalApplicants: 0,
+        rejectedApplicants: 0,
+    }
+
+    for (let i = 0; i < arr.length; i++) {
+        const data = arr[i];
+        if (data.tech === "Python") {
+            result.python_Devs++;
+        }
+        else if (data.tech === "JS") {
+            result.javaScript_Devs++;
+        }
+
+        else if (data.tech === ".Net") {
+            result.dotNet_Devs++;
+        }
+        else if (data.tech === "Java") {
+            result.java_Devs++;
+        }
+
+        if (data.yearsOfExperience <= 1 || (data.firstName == "null" || data.firstName == "") && (data.lastName ==
+            "null" || data.lastName == "")) {
+            result.rejectedApplicants++
+
+        }
+        result.totalApplicants++
+    }
+    return result;
 };
 
 // 4) ---------------------
@@ -239,7 +290,18 @@ let data = {
 //  2- You need to round the average to the nearest lower number 
 
 const classesAvg = (data) => {
-    // write your code here
+    for (let i = 0; i < data.grades.length; i++) {
+        const newGrades = data.grades[i];
+        for (let j = 0; j < newGrades.classes.length; j++) {
+            const calc = newGrades.classes[j];
+            let sum = 0;
+
+            for (let x = 0; x < calc.classScores.length; x++)
+                sum += calc.classScores[x];
+            calc.avg = Math.floor(sum / calc.classScores.length);
+        }
+    }
+    return data;
 };
 
 module.exports = { objLat, cvFormatter, applicationsStatics, classesAvg };
