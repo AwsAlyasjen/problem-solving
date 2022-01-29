@@ -17,12 +17,8 @@
 
 const arrInc = (arr) => {
     let result = [];
-
-    var doubles = numbers.map(function(num) {
-        return num + 10;
-        
-      });
-    return doubles;
+    // write your code here
+    return result;
 }
 
 
@@ -35,13 +31,7 @@ const arrInc = (arr) => {
 // 
 // ------------------------
 const roundDecimals = (arr) => {
-    let arr2=[];
-for (let i = 0; i < arr.length; i++) {
-    arr2[i]=(Math.round(arr[i]));
-    
-}
-return arr2;
-
+    // write your code here
 }
 
 // 3) ---------------------
